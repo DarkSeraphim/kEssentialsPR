@@ -16,9 +16,7 @@ public class CommandKessentials extends kCommand implements CommandExecutor {
 					
 				} else if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("resetconfig")) {
-						PlayerConfig.getPlayerConfig(player.getName()).addDefault("muted", false);
-						PlayerConfig.getPlayerConfig(player.getName()).addDefault("backpack", "54;");
-						PlayerConfig.savePlayerConfig(player.getName());
+						PlayerConfig.generatePlayerConfig(player.getName());
 					}
 				}
 			}

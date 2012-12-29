@@ -4,10 +4,11 @@ import java.io.IOException;
 
 import me.KeybordPiano459.kEssentials.commands.CommandSpawner;
 import me.KeybordPiano459.kEssentials.commands.kCommand;
-import me.KeybordPiano459.kEssentials.config.PlayerConfigValues;
+import me.KeybordPiano459.kEssentials.config.CreatePlayerConfigJoin;
 import me.KeybordPiano459.kEssentials.util.BukkitMetrics;
 import me.KeybordPiano459.kEssentials.util.helpers.Back;
 import me.KeybordPiano459.kEssentials.util.helpers.Backpack;
+import me.KeybordPiano459.kEssentials.util.helpers.MOTD;
 import me.KeybordPiano459.kEssentials.util.helpers.Mute;
 
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public class kEssentials extends JavaPlugin {
 		getLogger().info("kEssentials v1.0 has been enabled!");
 		kCommand.getCommands();
 		getConstructorClasses();
+		MOTD.createMOTD();
 		
 		try {
 			BukkitMetrics metrics = new BukkitMetrics(this);
@@ -36,7 +38,7 @@ public class kEssentials extends JavaPlugin {
 		getHelper(new Back());
 		getHelper(new Backpack());
 		getHelper(new Mute(this));
-		getHelper(new PlayerConfigValues(this));
+		getHelper(new CreatePlayerConfigJoin(this));
 		kCommand.getCommand("spawner", new CommandSpawner(this));
 	}
 	

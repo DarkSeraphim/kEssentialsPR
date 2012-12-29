@@ -19,6 +19,18 @@ public class PlayerConfig {
 	public static FileConfiguration customConfig = null;
 	public static File customConfigFile = null;
 	
+	public static void generatePlayerConfig(String player) {
+		if (customConfigFile != null) {
+			customConfigFile.delete();
+		}
+		
+		reloadPlayerConfig(player);
+		getPlayerConfig(player).set("muted", false);
+		getPlayerConfig(player).set("backpack", "54;");
+		savePlayerConfig(player);
+		reloadPlayerConfig(player);
+	}
+	
 	public static void reloadPlayerConfig(String player) {
 		if (customConfigFile == null) {
 			customConfigFile = new File(plugin.getDataFolder(), "playerdata/" + player + ".yml");
