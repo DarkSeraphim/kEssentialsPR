@@ -20,7 +20,8 @@ public class MOTD {
 			try {
 				motdFile.createNewFile();
 				FileWriter writer = new FileWriter(motdFile);
-				writer.write("Welcome to our server!");
+				writer.write("&dWelcome to our server!\n");
+				writer.write("&2Use minecraft's color codes to color the text.");
 				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
