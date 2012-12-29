@@ -39,6 +39,7 @@ public class kEssentials extends JavaPlugin {
 	public void getConstructorClasses() {
 		getHelper(new Back());
 		getHelper(new Backpack());
+		getHelper(new MOTD(this));
 		getHelper(new Mute(this));
 		getHelper(new CreatePlayerConfigJoin(this));
 		kCommand.getCommand("motd", new CommandMotd(this));
