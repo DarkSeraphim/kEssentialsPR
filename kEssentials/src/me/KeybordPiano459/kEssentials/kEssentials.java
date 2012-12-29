@@ -2,6 +2,7 @@ package me.KeybordPiano459.kEssentials;
 
 import java.io.IOException;
 
+import me.KeybordPiano459.kEssentials.commands.CommandMotd;
 import me.KeybordPiano459.kEssentials.commands.CommandSpawner;
 import me.KeybordPiano459.kEssentials.commands.kCommand;
 import me.KeybordPiano459.kEssentials.config.CreatePlayerConfigJoin;
@@ -20,8 +21,9 @@ public class kEssentials extends JavaPlugin {
 		getLogger().info("kEssentials v1.0 has been enabled!");
 		kCommand.getCommands();
 		getConstructorClasses();
-		MOTD.createMOTD();
-		
+		MOTD motd = new MOTD(this);
+		motd.createMOTD();
+
 		try {
 			BukkitMetrics metrics = new BukkitMetrics(this);
 			metrics.start();
@@ -29,19 +31,20 @@ public class kEssentials extends JavaPlugin {
 			// Failed to submit the stats :-(
 		}
 	}
-	
+
 	public void onDisable() {
 		getLogger().info("kEssentials v1.0 has been disabled.");
 	}
-	
+
 	public void getConstructorClasses() {
 		getHelper(new Back());
 		getHelper(new Backpack());
 		getHelper(new Mute(this));
 		getHelper(new CreatePlayerConfigJoin(this));
+		kCommand.getCommand("motd", new CommandMotd(this));
 		kCommand.getCommand("spawner", new CommandSpawner(this));
 	}
-	
+
 	public void getHelper(Listener listener) {
 		Bukkit.getServer().getPluginManager().registerEvents(listener, this);
 	}

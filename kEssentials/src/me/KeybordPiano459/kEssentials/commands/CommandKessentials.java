@@ -13,7 +13,7 @@ public class CommandKessentials extends kCommand implements CommandExecutor {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (args.length == 0) {
-					
+
 				} else if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("resetconfig")) {
 						PlayerConfig.generatePlayerConfig(player.getName());

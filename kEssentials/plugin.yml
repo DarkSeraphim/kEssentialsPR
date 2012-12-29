@@ -45,6 +45,9 @@ commands:
   me:
     description: Perform an action in the chat
     aliases: [action, kaction, kme]
+  motd:
+    description: See the message of the day
+    aliases: [kmotd]
   mute:
     description: Make it so that someone can't chat
     aliases: [silence, kmute, ksilence]
@@ -102,6 +105,7 @@ permissions:
       kessentials.hat: true
       kessentials.ignite.*: true
       kessentials.itemname: true
+      kessentials.motd: true
       kessentials.mute: true
       kessentials.myhead: true
       kessentials.night: true
@@ -136,6 +140,9 @@ permissions:
   kessentials.itemname:
     description: /itemname <name>
     default: op
+  kessentials.motd:
+    description: /motd
+    default: true
   kessentials.mute:
     description: /mute <player>
     default: op
