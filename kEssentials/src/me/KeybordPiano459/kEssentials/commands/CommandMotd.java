@@ -6,8 +6,8 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import me.KeybordPiano459.kEssentials.kEssentials;
-import me.KeybordPiano459.kEssentials.util.ChatManager;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +29,8 @@ public class CommandMotd extends kCommand implements CommandExecutor {
 							File file = new File(plugin.getDataFolder(), "motd.txt");
 							Scanner s = new Scanner(file);
 							while (s.hasNextLine()) {
-								player.sendMessage(ChatManager.colorCompatible(s.nextLine()));
+								player.sendMessage(ChatColor.translateAlternateColorCodes('&', s.nextLine()));
+								//player.sendMessage(ChatManager.colorCompatible(s.nextLine()));
 							}
 							s.close();
 						} catch (FileNotFoundException e) {

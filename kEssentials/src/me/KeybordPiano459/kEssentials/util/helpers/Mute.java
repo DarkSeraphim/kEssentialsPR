@@ -14,7 +14,10 @@ public class Mute implements Listener {
 	static kEssentials plugin;
 	public Mute(kEssentials plugin) {
 		Mute.plugin = plugin;
+		PlayerConfig = new PlayerConfig(plugin);
 	}
+	
+	private PlayerConfig PlayerConfig;
 	
 	@EventHandler
 	public void onChat(AsyncPlayerChatEvent event) {
@@ -33,11 +36,11 @@ public class Mute implements Listener {
 		}
 	}
 	
-	public static boolean getMute(Player player) {
+	public boolean getMute(Player player) {
 		return PlayerConfig.getPlayerConfig(player.getName()).getBoolean("muted");
 	}
 	
-	public static void setMute(Player player, Boolean mute) {
+	public void setMute(Player player, Boolean mute) {
 		PlayerConfig.getPlayerConfig(player.getName()).set("muted", mute);
 		PlayerConfig.savePlayerConfig(player.getName());
 	}

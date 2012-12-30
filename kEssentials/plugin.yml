@@ -33,6 +33,9 @@ commands:
   hat:
     description: Wear a block on your head
     aliases: [khat]
+  home:
+    description: Teleport to your home
+    aliases: [khome]
   ignite:
     description: Set someone on fire
     aliases: [burn, kburn, kignite]
@@ -72,6 +75,9 @@ commands:
   repair:
     description: Repair the item in your hand
     aliases: [krepair]
+  sethome:
+    description: Set your home
+    aliases: [ksethome]
   setwalkspeed:
     description: Set your own walk speed
     aliases: [sws, ws, ksetwalkspeed, ksws, kws]
@@ -103,6 +109,7 @@ permissions:
       kessentials.garbagecollector: true
       kessentials.getid: true
       kessentials.hat: true
+      kessentials.home: true
       kessentials.ignite.*: true
       kessentials.itemname: true
       kessentials.motd: true
@@ -114,6 +121,7 @@ permissions:
       kessentials.ram: true
       kessentials.remove: true
       kessentials.repair: true
+      kessentials.sethome: true
       kessentials.setwalkspeed: true
       kessentials.spawner: true
       kessentials.unmute: true

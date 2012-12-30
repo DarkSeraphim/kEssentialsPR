@@ -2,7 +2,8 @@ package me.KeybordPiano459.kEssentials.commands;
 
 import java.util.logging.Logger;
 
-import me.KeybordPiano459.kEssentials.util.helpers.Mute;
+import me.KeybordPiano459.kEssentials.config.PlayerConfig;
+import me.KeybordPiano459.kEssentials.kEssentials;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -11,6 +12,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandMute extends kCommand implements CommandExecutor {
+	static kEssentials plugin;
+	public CommandMute(kEssentials plugin) {
+		CommandMute.plugin = plugin;
+	}
+	
+	private PlayerConfig PlayerConfig = new PlayerConfig(plugin);
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("mute")) {
 			if (sender instanceof Player) {
@@ -18,10 +26,14 @@ public class CommandMute extends kCommand implements CommandExecutor {
 				if (args.length == 1) {
 					if (player.hasPermission("kessentials.mute")) {
 						Player tplayer = Bukkit.getServer().getPlayer(args[0]);
-						Mute.setMute(player, true);
-						player.sendMessage(GREEN + "You have muted " + args[0] + "!");
-						if (player != null) {
-							tplayer.sendMessage(DARK_GRAY + "You have been muted!");
+						if (PlayerConfig.hasPlayerConfig(args[0])) {
+							plugin.mute.setMute(player, true);
+							player.sendMessage(GREEN + "You have muted " + args[0] + "!");
+							if (tplayer != null) {
+								tplayer.sendMessage(DARK_GRAY + "You have been muted!");
+							}
+						} else {
+							player.sendMessage(RED + args[0] + " has never played on this server.");
 						}
 					} else {
 						noPermissionsMessage(player);
@@ -32,7 +44,7 @@ public class CommandMute extends kCommand implements CommandExecutor {
 			} else {
 				if (args.length == 1) {
 					Player player = Bukkit.getServer().getPlayer(args[0]);
-					Mute.setMute(player, true);
+					plugin.mute.setMute(player, true);
 					Logger.getLogger("Minecraft").info("You have muted " + args[0]);
 					if (player != null) {
 						player.sendMessage(DARK_GRAY + "You have been muted!");

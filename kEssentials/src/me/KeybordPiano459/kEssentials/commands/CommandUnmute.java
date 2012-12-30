@@ -2,6 +2,7 @@ package me.KeybordPiano459.kEssentials.commands;
 
 import java.util.logging.Logger;
 
+import me.KeybordPiano459.kEssentials.kEssentials;
 import me.KeybordPiano459.kEssentials.util.helpers.Mute;
 
 import org.bukkit.Bukkit;
@@ -11,6 +12,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandUnmute extends kCommand implements CommandExecutor {
+	static kEssentials plugin;
+	public CommandUnmute(kEssentials plugin) {
+		CommandUnmute.plugin = plugin;
+	}
+	
+	private Mute Mute = new Mute(plugin);
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("unmute")) {
 			if (sender instanceof Player) {

@@ -3,6 +3,7 @@ package me.KeybordPiano459.kEssentials.util.helpers;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import me.KeybordPiano459.kEssentials.kEssentials;
 import me.KeybordPiano459.kEssentials.config.PlayerConfig;
 
 import org.bukkit.Bukkit;
@@ -17,17 +18,24 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class Backpack implements Listener {
-	public static Inventory getBackpack(Player player) {
+	static kEssentials plugin;
+	public Backpack(kEssentials plugin) {
+		Backpack.plugin = plugin;
+	}
+	
+	private PlayerConfig PlayerConfig = new PlayerConfig(plugin);
+	
+	public Inventory getBackpack(Player player) {
 		return StringToInventory(PlayerConfig.getPlayerConfig(player.getName()).getString("backpack"));
 	}
 	
-	public static void setBackpack(Player player, Inventory inventory) {
+	public void setBackpack(Player player, Inventory inventory) {
 		String inv = InventoryToString(inventory);
 		PlayerConfig.getPlayerConfig(player.getName()).set("backpack", inv);
 		PlayerConfig.reloadPlayerConfig(player.getName());
 	}
 	
-	public static boolean hasBackpack(Player player) {
+	public boolean hasBackpack(Player player) {
 		if (PlayerConfig.getPlayerConfig(player.getName()).getString("backpack") == null) {
 			return false;
 		} else {
@@ -77,7 +85,7 @@ public class Backpack implements Listener {
 		return serialization;
 	}
 	
-	public static Inventory StringToInventory(String invString) {
+	public Inventory StringToInventory(String invString) {
 		String[] serializedBlocks = invString.split(";");
 		String invInfo = serializedBlocks[0];
 		Inventory deserializedInventory = Bukkit.getServer().createInventory(null, Integer.valueOf(invInfo));

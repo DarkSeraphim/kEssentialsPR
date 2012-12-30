@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 public class kCommand {
 	public static void getCommands() {
 		getCommand("back", new CommandBack());
-		getCommand("backpack", new CommandBackpack());
 		getCommand("butcher", new CommandButcher());
 		getCommand("clearenderchest", new CommandClearenderchest());
 		getCommand("clearinventory", new CommandClearinventory());
@@ -21,9 +20,7 @@ public class kCommand {
 		getCommand("hat", new CommandHat());
 		getCommand("ignite", new CommandIgnite());
 		getCommand("itemname", new CommandItemname());
-		getCommand("kessentials", new CommandKessentials());
 		getCommand("me", new CommandMe());
-		getCommand("mute", new CommandMute());
 		getCommand("myhead", new CommandMyhead());
 		getCommand("night", new CommandNight());
 		getCommand("online", new CommandOnline());
@@ -32,7 +29,6 @@ public class kCommand {
 		getCommand("remove", new CommandRemove());
 		getCommand("repair", new CommandRepair());
 		getCommand("setwalkspeed", new CommandSetwalkspeed());
-		getCommand("unmute", new CommandUnmute());
 		getCommand("workbench", new CommandWorkbench());
 		//getCommand("worldtime", new CommandWorldtime());
 	}

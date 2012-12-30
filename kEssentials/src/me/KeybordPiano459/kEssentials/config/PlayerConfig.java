@@ -16,10 +16,22 @@ public class PlayerConfig {
 		PlayerConfig.plugin = plugin;
 	}
 	
-	public static FileConfiguration customConfig = null;
-	public static File customConfigFile = null;
+	public FileConfiguration customConfig = null;
+	public File customConfigFile = null;
+	public String s = File.separator;
+	public String dataFolder = "plugins" + s + "kEssentials";
+	//private kConfig kConfig;
 	
-	public static void generatePlayerConfig(String player) {
+	public boolean hasPlayerConfig(String player) {
+		File file = new File(dataFolder, "playerdata" + s + player + ".yml");
+		if (file.isFile()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void generatePlayerConfig(String player) {
 		if (customConfigFile != null) {
 			customConfigFile.delete();
 		}
@@ -27,31 +39,31 @@ public class PlayerConfig {
 		reloadPlayerConfig(player);
 		getPlayerConfig(player).set("muted", false);
 		getPlayerConfig(player).set("backpack", "54;");
+		//getPlayerConfig(player).set("money", kConfig.getConfig().getDouble("starting-balance"));
 		savePlayerConfig(player);
-		reloadPlayerConfig(player);
 	}
 	
-	public static void reloadPlayerConfig(String player) {
+	public void reloadPlayerConfig(String player) {
 		if (customConfigFile == null) {
-			customConfigFile = new File(plugin.getDataFolder(), "playerdata/" + player + ".yml");
+			customConfigFile = new File(dataFolder, "playerdata" + s + player + ".yml");
 		}
 		customConfig = YamlConfiguration.loadConfiguration(customConfigFile);
 		
-		InputStream defConfigStream = plugin.getResource("playerdata/" + player + ".yml");
+		InputStream defConfigStream = plugin.getResource("playerdata" + s + player + ".yml");
 		if (defConfigStream != null) {
 			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
 			customConfig.setDefaults(defConfig);
 		}
 	}
 	
-	public static FileConfiguration getPlayerConfig(String player) {
+	public FileConfiguration getPlayerConfig(String player) {
 		if (customConfig == null) {
 			reloadPlayerConfig(player);
 		}
 		return customConfig;
 	}
 	
-	public static void savePlayerConfig(String player) {
+	public void savePlayerConfig(String player) {
 		if (customConfig == null || customConfigFile == null) {
 			return;
 		}

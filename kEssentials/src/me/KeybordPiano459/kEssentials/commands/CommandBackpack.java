@@ -1,5 +1,6 @@
 package me.KeybordPiano459.kEssentials.commands;
 
+import me.KeybordPiano459.kEssentials.kEssentials;
 import me.KeybordPiano459.kEssentials.config.PlayerConfig;
 import me.KeybordPiano459.kEssentials.util.helpers.Backpack;
 
@@ -12,6 +13,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class CommandBackpack extends kCommand implements CommandExecutor {
+	static kEssentials plugin;
+	public CommandBackpack(kEssentials plugin) {
+		CommandBackpack.plugin = plugin;
+	}
+	
+	private Backpack Backpack;
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("backpack")) {
 			if (sender instanceof Player) {
@@ -26,6 +34,7 @@ public class CommandBackpack extends kCommand implements CommandExecutor {
 							player.openInventory(inv);
 						} else {
 							Backpack.setBackpack(player, Bukkit.createInventory(player, 54, "Backpack"));
+							PlayerConfig PlayerConfig = new PlayerConfig(plugin);
 							PlayerConfig.reloadPlayerConfig(player.getName());
 							Inventory inv = Bukkit.createInventory(player, 54, "Backpack");
 							player.openInventory(inv);

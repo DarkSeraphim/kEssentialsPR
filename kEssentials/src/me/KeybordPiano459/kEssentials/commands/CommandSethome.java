@@ -3,43 +3,40 @@ package me.KeybordPiano459.kEssentials.commands;
 import me.KeybordPiano459.kEssentials.kEssentials;
 import me.KeybordPiano459.kEssentials.config.PlayerConfig;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-public class CommandHome extends kCommand implements CommandExecutor {
+public class CommandSethome extends kCommand implements CommandExecutor {
 	static kEssentials plugin;
-	public CommandHome(kEssentials plugin) {
-		CommandHome.plugin = plugin;
+	public CommandSethome(kEssentials plugin) {
+		CommandSethome.plugin = plugin;
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("home")) {
+		if (cmd.getName().equalsIgnoreCase("sethome")) {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (args.length == 0) {
-					if (player.hasPermission("kessentials.home")) {
+					if (player.hasPermission("kessentials.sethome")) {
 						PlayerConfig PlayerConfig = new PlayerConfig(plugin);
 						FileConfiguration config = PlayerConfig.getPlayerConfig(player.getName());
-						World world = Bukkit.getServer().getWorld(config.getString("home.world"));
-						double x = config.getInt("home.x");
-						double y = config.getInt("home.y");
-						double z = config.getInt("home.z");
-						float yaw = config.getInt("home.yaw");
-						float pitch = config.getInt("home.pitch");
-						Location home = new Location(world, x, y, z, yaw, pitch);
-						player.teleport(home);
-						player.sendMessage(GREEN + "You have been sent home!");
+						Location loc = player.getLocation();
+						config.set("home.world", loc.getWorld().getName());
+						config.set("home.x", loc.getX());
+						config.set("home.y", loc.getY());
+						config.set("home.z", loc.getZ());
+						config.set("home.yaw", loc.getYaw());
+						config.set("home.pitch", loc.getPitch());
+						player.sendMessage(GREEN + "Your home has been set!");
 					} else {
 						noPermissionsMessage(player);
 					}
 				} else {
-					incorrectUsage(player, "/home");
+					incorrectUsage(player, "/sethome");
 				}
 			} else {
 				consoleError();
