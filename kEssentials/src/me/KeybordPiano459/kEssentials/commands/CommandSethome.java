@@ -8,27 +8,18 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandSethome extends kCommand implements CommandExecutor
-{
-
-    kEssentials plugin;
-
-    public CommandSethome(kEssentials plugin)
-    {
-        this.plugin = plugin;
+public class CommandSethome extends kCommand implements CommandExecutor {
+    public CommandSethome(kEssentials plugin) {
+        super(plugin);
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
-    {
-        if (cmd.getName().equalsIgnoreCase("sethome"))
-        {
-            if (sender instanceof Player)
-            {
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("sethome")) {
+            if (sender instanceof Player) {
                 Player player = (Player) sender;
-                if (args.length == 0)
-                {
-                    if (player.hasPermission("kessentials.sethome"))
-                    {
+                if (args.length == 0) {
+                    if (player.hasPermission("kessentials.sethome")) {
                         kPlayer kplayer = plugin.getPlayerManager().getPlayer(player.getName());
                         Location loc = player.getLocation();
                         kplayer.getPlayerConfig().getConfig().set("home.world", loc.getWorld().getName());
@@ -38,19 +29,13 @@ public class CommandSethome extends kCommand implements CommandExecutor
                         kplayer.getPlayerConfig().getConfig().set("home.yaw", loc.getYaw());
                         kplayer.getPlayerConfig().getConfig().set("home.pitch", loc.getPitch());
                         player.sendMessage(GREEN + "Your home has been set!");
-                    }
-                    else
-                    {
+                    } else {
                         noPermissionsMessage(player);
                     }
-                }
-                else
-                {
+                } else {
                     incorrectUsage(player, "/sethome");
                 }
-            }
-            else
-            {
+            } else {
                 consoleError();
             }
         }

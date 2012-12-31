@@ -1,0 +1,34 @@
+name: kEconomy
+main: me.KeybordPiano459.kEconomy.kEconomy
+version: 1.0
+depend: [kEssentials]
+
+commands:
+  money:
+    description: Base command for kEconomy
+
+permissions:
+  keconomy.*:
+    description: Access to all kEconomy stuff
+    default: op
+    children:
+      keconomy.money.give: true
+      keconomy.money.pay: true
+      keconomy.money.take: true
+      keconomy.money.view: true
+      keconomy.money.view.others: true
+  keconomy.money.give:
+    description: Access to use /money [give]
+    default: op
+  keconomy.money.pay:
+    description: Access to use /money [pay]
+    default: true
+  keconomy.money.take:
+    description: Access to use /money [take]
+    default: op
+  keconomy.money.view:
+    description: Access to see your money
+    default: true
+  keconomy.money.view.others:
+    description: Access to view other players money
+    default: true
