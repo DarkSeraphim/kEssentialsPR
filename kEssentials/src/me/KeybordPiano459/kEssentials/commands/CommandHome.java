@@ -2,6 +2,7 @@ package me.KeybordPiano459.kEssentials.commands;
 
 import me.KeybordPiano459.kEssentials.kEssentials;
 import me.KeybordPiano459.kEssentials.config.PlayerConfig;
+import me.KeybordPiano459.kEssentials.players.kPlayer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -13,9 +14,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class CommandHome extends kCommand implements CommandExecutor {
-	static kEssentials plugin;
+	kEssentials plugin;
 	public CommandHome(kEssentials plugin) {
-		CommandHome.plugin = plugin;
+		this.plugin = plugin;
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -23,25 +24,31 @@ public class CommandHome extends kCommand implements CommandExecutor {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (args.length == 0) {
-					if (player.hasPermission("kessentials.home")) {
-						PlayerConfig PlayerConfig = new PlayerConfig(plugin);
-						FileConfiguration config = PlayerConfig.getPlayerConfig(player.getName());
-						World world = Bukkit.getServer().getWorld(config.getString("home.world"));
-						double x = config.getInt("home.x");
-						double y = config.getInt("home.y");
-						double z = config.getInt("home.z");
-						float yaw = config.getInt("home.yaw");
-						float pitch = config.getInt("home.pitch");
+					if (player.hasPermission("kessentials.home")) 
+                                        {
+                                                kPlayer kplayer = plugin.getPlayerManager().getPlayer(player.getName());
+                                                World world = Bukkit.getServer().getWorld(kplayer.getPlayerConfig().getConfig().getString("home.world"));
+						double x = kplayer.getPlayerConfig().getConfig().getInt("home.x");
+						double y = kplayer.getPlayerConfig().getConfig().getInt("home.y");
+						double z = kplayer.getPlayerConfig().getConfig().getInt("home.z");
+						float yaw = kplayer.getPlayerConfig().getConfig().getInt("home.yaw");
+						float pitch = kplayer.getPlayerConfig().getConfig().getInt("home.pitch");
 						Location home = new Location(world, x, y, z, yaw, pitch);
 						player.teleport(home);
 						player.sendMessage(GREEN + "You have been sent home!");
-					} else {
+					} 
+                                        else 
+                                        {
 						noPermissionsMessage(player);
 					}
-				} else {
+				} 
+                                else 
+                                {
 					incorrectUsage(player, "/home");
 				}
-			} else {
+			} 
+                        else 
+                        {
 				consoleError();
 			}
 		}
